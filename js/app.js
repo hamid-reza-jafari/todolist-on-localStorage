@@ -5,21 +5,25 @@ let TodoContainer = document.getElementById("todoList")
 var todoArray = []
 
 function send() {
-    let inputVal = Input.value
+    if (Input.value === "") {
+        alert("Field Can't Empty !")
+    } else {
+        let inputVal = Input.value
 
-    var todoObj = {
-        id: todoArray.length + 1,
-        title: inputVal,
-        complete: false
+        var todoObj = {
+            id: todoArray.length + 1,
+            title: inputVal,
+            complete: false
+        }
+
+        Input.value = ""
+
+        todoArray.push(todoObj)
+        setToLocal(todoArray)
+        todoCreator(todoArray)
+
+        Input.focus()
     }
-
-    Input.value = ""
-
-    todoArray.push(todoObj)
-    setToLocal(todoArray)
-    todoCreator(todoArray)
-
-    Input.focus()
 }
 
 function setToLocal(todoList) {
@@ -27,6 +31,7 @@ function setToLocal(todoList) {
 }
 
 function todoCreator(todoList) {
+
     let liEl, labelEl, completeBtn, deleteBtn
 
     TodoContainer.innerHTML = ""
@@ -60,6 +65,7 @@ function todoCreator(todoList) {
         TodoContainer.append(liEl)
 
     });
+
 }
 
 function completeTodoFunc(thisId) {
